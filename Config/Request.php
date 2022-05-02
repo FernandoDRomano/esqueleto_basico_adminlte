@@ -1,4 +1,5 @@
 <?php namespace Config;
+
 	function CarpetasDeURLAArrayd($URL){
 		$Respuesta = "";
 		$ruta = explode("/", $URL);
@@ -6,6 +7,7 @@
 		$Respuesta = $ruta;
 		return $Respuesta;
 	}
+
 	class Request{
 		private $controlador;
 		private $metodo;

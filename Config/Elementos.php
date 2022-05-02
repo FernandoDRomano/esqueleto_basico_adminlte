@@ -455,6 +455,7 @@
 				//echo(explode('/',$URL)[0]);
 			}
 		}
+		
 		public static function CrearMainMenu($id,$Titulo,$Icono,$TituloSubMenues,$URLSubMenues,$PermisosFicherosDeMenues){
 			//print_r($URLSubMenues);
 			$URLConPermisos = $URLSubMenues;
@@ -522,6 +523,7 @@
 				</div>
 			');
 		}
+
 		public static function CrearTabladashboard($Elementos,$Tamaño,$TituloDeTabla,$Display = "display: none",$Info = true,$NumeroDeFilas = 100,$StyleNumeroDeFilasDiv = "", $StyleDescargasDiv = "", $FullVertical = true, $StyleDivPrimario = "",$StylePaginador = ""){
 			$IdTabladashboard = "Sizable" . $Elementos;
 			$IdDiv = "Div" . $Elementos;
@@ -603,6 +605,92 @@
 			</div>
 			');
 		}
+
+		/**
+		 * TABLA MODIFICADA
+		 */
+		public static function CrearTabla($Elementos,$Tamaño,$TituloDeTabla,$Display = "display: none",$Info = true,$NumeroDeFilas = 100,$StyleNumeroDeFilasDiv = "", $StyleDescargasDiv = "", $FullVertical = true, $StyleDivPrimario = "",$StylePaginador = ""){
+			$IdTabladashboard = "Sizable" . $Elementos;
+			$IdDiv = "Div" . $Elementos;
+			$IdPaginador = "DivPaginador" . $Elementos;
+			$IdMaximoDeFilas = "MaximoDeFilas" . $Elementos;
+			$IdTabla = "Tabla" . $Elementos;
+			if($FullVertical){
+				$classportletlight = "portlet light";
+			}else{
+				$classportletlight = "";
+			}
+			//			<hr>
+			//				<span class="caption-helper">Los Datos Mostrados Contienen Resultados De La Fecha Buscada.</span>
+			echo('
+			<div class="col-sm-' . $Tamaño . ' col-xs-3" style="overflow-x:auto;' . $StyleDivPrimario . '">
+				<div class="' . $classportletlight . '" id="' . $IdTabladashboard . '" style="'. $Display . '">
+				
+			');
+			if($TituloDeTabla!=""){
+				echo('
+					<div class="portlet-title">
+						<div class="caption caption-md">
+							<i class="icon-bar-chart theme-font hide"></i>
+							<span class="caption-subject theme-font bold uppercase"></span>
+							<span class="caption-helper" style="border-bottom: 2px solid #0068a9!important;">' . $TituloDeTabla . '</span>
+						</div>
+				');
+				if($Info){
+					echo('
+						<div class="actions">
+							<a class="TextoSombreado" href="javascript:HideFullScreen(\'Sizable\');" data-original-title="" title="">
+							<B style="color:#3030ff;">Volver</B>
+							</a>
+							<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:HideFullScreen(\'Sizable\');" data-original-title="" title="">
+							</a>
+						</div>
+					');
+				}
+				echo('
+					</div>
+				');
+			}
+			echo('
+					<div class="col-sm-12" id="' . $IdDiv . '" >
+						<hr class="size2 hideline">
+						<div class="Paginador" id="' . $IdPaginador . '" style="' . $StylePaginador . '">
+						</div>
+						<div class="col-md-12 MaximoDeFilas" style="' . $StyleNumeroDeFilasDiv . '">
+							<b>Numero De Lineas Por Pagina</b>
+							<input placeholder="" type="numberNoFloat" id="' . $IdMaximoDeFilas . '" " value="' . $NumeroDeFilas . '" style="">
+						</div>
+						<div class="col-sm-4" style="' . $StyleDescargasDiv . '">
+							<label class="control-label"> Exportar Tabla A Archivo
+								<span class="required" aria-required="true"></span>
+							</label>
+							<div class="btn-group">
+								<button style="border-color: black;" onclick="DescargarTablaXLSX(\'' . $IdDiv . '\')" class="btn" title="XLSX Para Exel">
+									<span>
+										<i class="fas fa-file-excel" style="color:green;"></i>
+									</span>
+								</button>
+								<button style="border-color: black;" onclick="DescargarTablaCSV(\'' . $IdDiv . '\')" class="btn" title="CSV Para Exel">
+									<span>
+										<i class="fas fa-file-csv" style="color:blue;"></i>
+									</span>
+								</button>
+								<button style="border-color: black;" onclick="DescargarTablaPDF(\'' . $IdDiv . '\')" class="btn" title="PDF Para Adove">
+									<span>
+										<i class="fas fa-file-pdf" style="color:red;"></i>
+									</span>
+								</button>
+							</div>
+						</div>
+						<table id="' . $IdTabla . '" class="table table-striped table-bordered nowrap" style="width:100%">
+						</table>
+					</div>
+					
+				</div>
+			</div>
+			');
+		}
+
 	}
 ?>
 
