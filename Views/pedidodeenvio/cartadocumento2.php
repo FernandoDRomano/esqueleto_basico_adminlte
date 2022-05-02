@@ -554,7 +554,7 @@
 			}
 		</style>
 		
-		<div class="col-md-12" style="">
+		<div class="col-md-12 m-5" style="">
 			<!--<p id="Paragrapiframe">Copia No Valida Legalmente</p>-->
 			<iframe id="iframePDF" type="application/pdf" style="width: inherit;height:266mm;display: none;"><!---->
 			</iframe><!--  width:279mm; height:266mm-->
