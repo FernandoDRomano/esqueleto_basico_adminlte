@@ -349,8 +349,6 @@
       labelMonthSelect: 'Seleccione un Mes',
       labelYearSelect: 'Selecciones un Año',
 
-      max: new Date(),
-
       // Format
       firstDay:1,
       //format:"dddd d !de mmmm !de yyyy",
@@ -362,12 +360,6 @@
       closeOnClear: true,
 
     })
-    const fecha = new Date(Date.now());
-    const anio = fecha.getFullYear();
-    const mes = fecha.getMonth() + 1;
-    const dia = fecha.getDate();
-    document.getElementById('FechaDesde').value = new Date(`${anio}/${mes}/${dia}`);
-    document.getElementById('FechaHasta').value = new Date(`${anio}/${mes}/${dia}`);
 
     //DATATABLE
     

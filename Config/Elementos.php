@@ -28,6 +28,31 @@
 					</div>
 			');
 		}
+
+		/**
+		 * NUEVO FORM FILE 2 COLUMNAS
+		 */
+		public static function FormFileDosColumnasNuevo($id, $Formatos, $MultipesFicheros, $Tamaño, $Texto, $Comentario,$Funcion, $TextoImagen = "", $class = "" ){
+			if($TextoImagen == ""){
+				$TextoImagen = 'Seleccione Archivos (' . $Formatos . ')';
+			}
+			echo('
+					<div class="col-md-4">
+							<label class="SubaDeImagenes" for="' . $id . '" style="width: 100%;">' . $TextoImagen . '</label>
+							<input class="SubaDeImagenes" type="file" id="' . $id . '" name="image_uploads[]" accept="' . $Formatos . '" ' .$MultipesFicheros . '>
+				
+					</div>
+					<div class="col-md-4">
+			');
+							Elementos::CrearBoton('PostImagenDeFichero(this)',"",$Texto,$Comentario,"Boton".$id,"display: none;", $class);
+			echo('		
+						<div class="preview" style="margin-top: 20px;">
+							<p></p>
+						</div>
+					</div>
+			');
+		}
+
 		public static function CerrarFormulario(){
 			echo('	
 				</form>

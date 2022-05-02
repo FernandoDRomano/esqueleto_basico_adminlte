@@ -346,7 +346,7 @@
 	
 	
 		function Reporte2(){
-
+		console.log("Empezando la descarga")
 		// filtro=["User","time","UserId"];
 		// filtroX=["1",Math.random(),UserId];
 		// var Parametros = ArraydsAJson(filtro,filtroX);
@@ -359,7 +359,7 @@
 		var BarcodeExterno = $('#BarcodeExterno').val();
 
         location.href = URLJS + "XMLHttpRequest/clientepiezassolicitadas/reporteIntra.php?UserId=" + UserId + "&ApellidoYNombre=" + ApellidoYNombre + "&FechaI=" + FechaDesde + "&FechaF=" + FechaHasta + "&BarcodeExterno=" + BarcodeExterno + "&Documento=" + Documento;
-        
+        console.log("Termino la descarga")
 	}
 
 
