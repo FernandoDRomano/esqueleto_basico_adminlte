@@ -477,13 +477,33 @@
                         Elementos::CrearImput("UserId","text","UserId","6","value='" . $UserId . "'");
                         Elementos::EndHide();
 
+                        //Elementos::FormFileDosColumnasNuevo('image_uploads', '.png', 'nomultiple', '12', 'Subir Firma Digital', '','SubirFirma(this)','Seleccione Firma Digital', 'btn btn-warning text-white');//Elementos::EndFormFile('image_uploads', '.jpg, .jpeg, .png', 'nomultiple', '12', 'Subir Firma Digital', '','SubirFirma(this)','Seleccione Firma');
+                        //Elementos::CrearBoton('VistaPreviaPDF(\'textBox\')',"4","Cargar Vista Previa","","VistaPrevia", "", "btn btn-primary text-white");//,"display:none;"
                     ?>    
 
+                    
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="">
                                 <label class="SubaDeImagenes btn btn-warning text-white" for="image_uploads" style="">Seleccione Firma Digital</label>
                                 <input class="SubaDeImagenes d-none" type="file" id="image_uploads" name="image_uploads[]" accept=".png" nomultiple="">
                         </div>
+
+                        <div class="">
+			
+                            <div class="col-md-" style="display: none;">
+                                <div class="span9 btn-block">
+                                    <button id="Botonimage_uploads" class="btn btn-large btn-block btn-tertiary" type="button" onclick="PostImagenDeFichero(this)">
+                                        <i class=""></i>
+                                        Subir Firma Digital
+                                    </button>
+                                    <div class="col-md-12" style="text-align:center; color:#0000C0; font-size:10px;"></div>
+                                </div>
+                            </div>
+                                    
+                            <div class="preview" style="margin-top: 20px;">
+                                <p></p>
+                            </div>
+					    </div>
 
                         <div class="" >
                             <div class="span9 btn-block">
@@ -495,6 +515,7 @@
                             </div>
                         </div>
                     </div>
+                    
                     
                     <!-- BOTONES -->
                 </div>
@@ -691,3 +712,8 @@ body {
 	border: 0;}
 		</style>
 
+<script>
+    $('.select-2').select2({
+        theme: "bootstrap4"
+    });
+</script>
