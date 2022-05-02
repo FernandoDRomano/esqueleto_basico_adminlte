@@ -6,12 +6,11 @@
 	use Config\Elementos as Elementos;
 ?>
 
-<p>Este Panel Mostrara Los Pedidos Del Cliente Por Medio De Plataformas APPI, Las Piezas Creadas Por Medio De API Contienen El UsuarioId 2</p>
-
 
 <link rel="stylesheet" href="<?php if(SUBDOMINIO != ""){echo ("/" . SUBDOMINIO. "/");}else{echo ("/");} ?>Styles/Styles/Tablero.css">
-	
-  <div class="col-md-12">
+
+<!--
+<div class="col-md-12">
 		<div class="form-group">
 			<div id="ModalDatos" class="modal fade" style="background-color: #333333c2;">
 				<div class="row" id="container" style="position: absolute;top: 10px;left: 10px;right: 10px;background-color: #ffffff;"> 
@@ -81,7 +80,7 @@
 
               <div class="row">
                 <div class="col-12 col-md-6 col-lg-4 col-xl-3 col-md-3">
-                  <button type="button" class="btn btn-secondary" id="SalirDeModal">
+                  <button type="button" class="btn btn-secondary" id="SalirDeModal" data-dismiss="modal">
                   <i class="fas fa-undo"></i>Volver
                   </button>
                 </div>
@@ -103,7 +102,7 @@
                 </div>
                 
                 <div class="col-md-3" style="display:none">
-                  <button type="button" class="btn btn-secondary" id="SalirDeModal2">
+                  <button type="button" class="btn btn-secondary" id="SalirDeModal2" data-dismiss="modal">
                   <i class="fas fa-undo"></i>Volver
                   </button>
                 </div>
@@ -117,6 +116,121 @@
 			</div>
 		</div>
 	</div>
+
+-->
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+    <div class="modal fade bd-example-modal-lg" id="ModalDatos" tabindex="-1" role="dialog" aria-labelledby="ModalDatosLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="ModalDatosLabel">Pieza <b id="DetalleDePiezaActual"></b></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
+            <div class="row">
+                    
+                    <div class="col-12 col-md-6">
+                      <div class="form-group">
+                        <label for="EstadosDePiezasApellidoYNombre">Apellido y Nombre</label>
+                        <input class="form-control" type="text" name="EstadosDePiezasApellidoYNombre" id="EstadosDePiezasApellidoYNombre" readonly>
+                      </div>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                      <div class="form-group">
+                        <label for="EstadosDePiezasDocumento">DNI/DU</label>
+                        <input class="form-control" type="text" name="EstadosDePiezasDocumento" id="EstadosDePiezasDocumento" readonly>
+                      </div>
+                    </div>
+                    
+                    <div class="col-12 col-md-6">
+                      <div class="form-group">
+                        <label for="EstadosDePiezasDirecciónDeEntrega">Dirección de Entrega</label>
+                        <input class="form-control" type="text" name="EstadosDePiezasDirecciónDeEntrega" id="EstadosDePiezasDirecciónDeEntrega" readonly>
+                      </div>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                      <div class="form-group">
+                        <label for="EstadosDePiezasCodigoExterno">Codigo Externo</label>
+                        <input class="form-control" type="text" name="EstadosDePiezasCodigoExterno" id="EstadosDePiezasCodigoExterno" readonly>
+                      </div>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                      <div class="form-group">
+                        <label for="EstadosDePiezasUltimoEstado">Ultimo estado</label>
+                        <input class="form-control" type="text" name="EstadosDePiezasUltimoEstado" id="EstadosDePiezasUltimoEstado" readonly>
+                      </div>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                      <div class="form-group">
+                        <label for="EstadosDePiezasFechaUltimoEstado">Fecha último estado</label>
+                        <input class="form-control" type="text" name="EstadosDePiezasFechaUltimoEstado" id="EstadosDePiezasFechaUltimoEstado" readonly>
+                      </div>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                      <div class="form-group">
+                        <label for="EstadosDePiezasRecibió">Recibió</label>
+                        <input class="form-control" type="text" name="EstadosDePiezasRecibió" id="EstadosDePiezasRecibió" readonly>
+                      </div>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                      <div class="form-group">
+                        <label for="EstadosDePiezasVínculo">Vínculo</label>
+                        <input class="form-control" type="text" name="EstadosDePiezasVínculo" id="EstadosDePiezasVínculo" readonly>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="row">
+                    <div class="col-12 col-md-6 ">
+                      <button type="button" class="btn btn-secondary" id="SalirDeModal" data-dismiss="modal">
+                      <i class="fas fa-undo"></i>Volver
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-12 mb-4">
+                      <?php 
+                        Elementos::CrearTabladashboard("EstadosDePiezas","12","","display:block",false,5000,"display:none","display:none",false,"display:block","display: none","display: none");
+                      ?>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    
+                  <div class="form-group col-12">
+                      <div class="card-header text-uppercase font-weight-bold"><font><font style="vertical-align: inherit;">Acuse En Calle</font></font></div>
+                      <img id="FotoAndroid" src="" class="mx-auto d-block" style="width: -webkit-fill-available;max-width: 100%;">
+                    </div>
+                    
+                    <div class="col-md-3" style="display:none">
+                      <button type="button" class="btn btn-secondary" id="SalirDeModal2" data-dismiss="modal">
+                      <i class="fas fa-undo"></i>Volver
+                      </button>
+                    </div>
+
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
 
 <style>
 	#ModalDatos ::-webkit-scrollbar {
@@ -142,6 +256,7 @@
 		padding: .75rem 1.25rem;
 	}
 </style>
+
 
 <!-- CARD CON FORMULARIO -->
 <div class="row justify-content-center mt-3">
@@ -234,6 +349,8 @@
       labelMonthSelect: 'Seleccione un Mes',
       labelYearSelect: 'Selecciones un Año',
 
+      max: new Date(),
+
       // Format
       firstDay:1,
       //format:"dddd d !de mmmm !de yyyy",
@@ -245,9 +362,16 @@
       closeOnClear: true,
 
     })
+    const fecha = new Date(Date.now());
+    const anio = fecha.getFullYear();
+    const mes = fecha.getMonth() + 1;
+    const dia = fecha.getDate();
+    document.getElementById('FechaDesde').value = new Date(`${anio}/${mes}/${dia}`);
+    document.getElementById('FechaHasta').value = new Date(`${anio}/${mes}/${dia}`);
 
     //DATATABLE
     
+    /*
     $(document).ready(function() {
         
         // Setup - add a text input to each footer cell
@@ -293,5 +417,24 @@
           
         });
     } );
-    
+    */
+    $("#TablaSolicitudes").DataTable({
+      "language": {
+            "lengthMenu": "Mostrar _MENU_ registros por página",
+            "zeroRecords": "No se encontraron registros",
+            "info": "Mostrando página _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros disponibles",
+            "infoFiltered": "(filtrado de _MAX_ registros)",
+            "search": "Buscar:",
+            "loadingRecords": "Cargando ...",
+            "processing": "Procesando ...",
+            "paginate": {
+              "first": "Primero",
+              "last": "Último",
+              "next": "Siguiente",
+              "previous": "Anterior"
+            }
+          },
+          "scrollX": true,
+    });
   </script>
