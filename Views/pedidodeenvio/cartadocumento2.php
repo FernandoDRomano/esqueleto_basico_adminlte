@@ -163,7 +163,7 @@
 
                     <div class="form-group col-12 col-md-4">
                         <label for="DestinatarioCodigoPostal">Codigo Postal <span style="color:red;">*</span></label>
-                        <input placeholder="Codigo Postal" type="CodigoPostal" id="DestinatarioCodigoPostal" name="DestinatarioCodigoPostal" class="form-control" placeholder="Codigo Postal">
+                        <input placeholder="Codigo Postal" type="text" data-inputmask="'mask': '9999'" data-mask inputmode="text" id="DestinatarioCodigoPostal" name="DestinatarioCodigoPostal"  class="form-control">
                     </div>
                 </div>
 
@@ -175,7 +175,7 @@
 
                     <div class="form-group col-12 col-md-3">
                         <label for="DestinatarioNumero">Número <span style="color:red;">*</span></label>
-                        <input type="text" name="DestinatarioNumero" id="DestinatarioNumero" class="form-control" placeholder="Número">
+                        <input type="number" name="DestinatarioNumero" id="DestinatarioNumero" class="form-control" placeholder="Número">
                     </div>
 
                     <div class="form-group col-12 col-md-3">
@@ -207,7 +207,7 @@
 
                     <div class="form-group col-12 col-md-3">
                         <label for="RemitenteNumero">Número <span style="color:red;">*</span></label>
-                        <input type="text" name="RemitenteNumero" id="RemitenteNumero" class="form-control" placeholder="Número">
+                        <input type="number" name="RemitenteNumero" id="RemitenteNumero" class="form-control" placeholder="Número">
                     </div>
 
                     <div class="form-group col-12 col-md-3">
@@ -234,7 +234,7 @@
 
                     <div class="form-group col-12 col-md-4">
                         <label for="RemitenteCodigoPostal">Codigo Postal <span style="color:red;">*</span></label>
-                        <input placeholder="Codigo Postal" type="CodigoPostal" id="RemitenteCodigoPostal" name="RemitenteCodigoPostal" class="form-control" placeholder="Codigo Postal">
+                        <input placeholder="Codigo Postal" type="text" data-inputmask="'mask': '9999'" data-mask inputmode="text" id="RemitenteCodigoPostal" name="RemitenteCodigoPostal" class="form-control">
                     </div>
                 </div>
 
@@ -243,10 +243,20 @@
                         <label for="RemitenteEmail">Email <span style="color:red;">*</span></label>
                         <input type="email" name="RemitenteEmail" id="RemitenteEmail" class="form-control" placeholder="@gmail.com">
                     </div>
-
+                    <!--
                     <div class="form-group col-12 col-md-6">
                         <label for="RemitenteCelular">Celular <span style="color:red;">*</span> <span style="color:blue;" class="small">Codigo De Area + Numero Personal 10 Digitos</span></label>
                         <input placeholder="Celular" type="Celular" id="RemitenteCelular" name="RemitenteCelular" class="form-control">
+                    </div>
+                    -->
+                    <div class="form-group col-12 col-md-6">
+                    <label for="RemitenteCelular">Celular <span style="color:red;">*</span> <span style="color:blue;" class="small">Codigo De Area + celular sin el 15</span></label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                            </div>
+                            <input type="text" id="RemitenteCelular" name="RemitenteCelular" class="form-control" data-inputmask="'mask': '(999) 999-9999'" data-mask inputmode="text" placeholder="(___) ___-____">
+                        </div>
                     </div>
                 </div>
 
@@ -507,7 +517,7 @@
 
                         <div class="" >
                             <div class="span9 btn-block">
-                                <button id="VistaPrevia" class="btn btn-primary text-white" type="button" onclick="VistaPreviaPDF('textBox')">
+                                <button id="VistaPrevia" class="btn btn-primary text-white" type="button" onclick="verificar()">
                                     <i class=""></i>
                                     Cargar Vista Previa
                                 </button>
@@ -534,9 +544,6 @@
 				</div>
 		</div>
     </div>
-		
-		
-		
 			
         
 		<img id="imgBase" src="BasePDF.jpg" alt="Smiley face" height="auto" width="auto" hidden>
@@ -713,7 +720,199 @@ body {
 		</style>
 
 <script>
-    $('.select-2').select2({
-        theme: "bootstrap4"
+    $( document ).ready(function() {
+        
+        $('.select-2').select2({
+            theme: "bootstrap4"
+        });
+        
+        $('[data-mask]').inputmask();
+
     });
+
+    function mostrarError(msj){
+        const alertError = `
+                <div class="alert alert-danger alert-dismissible fade show alert-centrado" role="alert" id="alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    ${msj} 
+                </div>
+            `
+
+        setTimeout(() => {
+            document.getElementById('alert-danger').remove();
+        }, 1500);
+
+        document.getElementById('body').insertAdjacentHTML('afterbegin', alertError)
+    }
+
+    function validarEmail(email){
+        var regOficial = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+        var reg = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+        return reg.test(email) && regOficial.test(email)
+    }
+
+    function validarCelular(){
+        const regex = /_/g;
+        let celular = document.getElementById('RemitenteCelular').value
+        celular = celular.replace(regex, '')
+    
+        return celular.length == 14
+    }
+
+    function validarCodigoPostal(cp){
+        const regex = /_/g;
+        cp = cp.replace(regex, '')
+    
+        return cp.length == 4
+    }
+
+    function verificar() {
+        
+        console.log("Entro a verificar")
+            if ( !$("#DestinatarioNombre").val().trim().length > 0 ) {
+                mostrarError("Ingrese el nombre del destinatario")
+                $("#DestinatarioNombre").focus()
+                return;
+            }
+
+            
+            if ( !$("#DestinatarioApellido").val().trim().length > 0 ) {
+                mostrarError("Ingrese el apellido del destinatario")
+                $("#DestinatarioApellido").focus()
+                return;
+            }
+
+            if ( $("#DestinatarioProvincia").val() == "0" ) {
+                mostrarError("Seleccione la provincia del destinatario")
+                $("#DestinatarioProvincia").focus()
+                return;
+            }
+            
+            if ( $("#DestinatarioLocalidad").val() == "0" ) {
+                mostrarError("Seleccione la localidad del destinatario")
+                $("#DestinatarioLocalidad").focus()
+                return;
+            }
+
+            /*
+            if ( $("#DestinatarioCodigoPostal").val().trim().length != 4 ) {
+                mostrarError("El codigo postal debe contener 4 digitos")
+                $("#DestinatarioCodigoPostal").focus()
+                return;
+            }
+            */
+
+            if ( !validarCodigoPostal($("#DestinatarioCodigoPostal").val()) ) {
+                mostrarError("El codigo postal debe contener 4 digitos")
+                $("#DestinatarioCodigoPostal").focus()
+                return;
+            }
+
+            if ( !$("#DestinatarioCalle").val().trim().length > 0 ) {
+                mostrarError("Ingrese la calle del destinatario")
+                $("#DestinatarioCalle").focus()
+                return;
+            }
+
+            if ( !$("#DestinatarioNumero").val().trim().length > 0 ) {
+                mostrarError("Ingrese el número de la calle del destinatario")
+                $("#DestinatarioNumero").focus()
+                return;
+            }
+
+            if ( !$("#RemitenteNombre").val().trim().length > 0 ) {
+                mostrarError("Ingrese el nombre/razón social del remitente")
+                $("#RemitenteNombre").focus()
+                return;
+            }
+
+            if ( !$("#RemitenteCalle").val().trim().length > 0 ) {
+                mostrarError("Ingrese la calle del remitente")
+                $("#RemitenteCalle").focus()
+                return;
+            }
+
+            if ( !$("#RemitenteNumero").val().trim().length > 0 ) {
+                mostrarError("Ingrese el número de la calle del remitente")
+                $("#RemitenteNumero").focus()
+                return;
+            }
+
+            if ( $("#RemitenteProvincia").val().trim() == "0" ) {
+                mostrarError("Seleccione la provincia del remitente")
+                $("#RemitenteProvincia").focus()
+                return;
+            }
+            if ( $("#RemitenteLocalidad").val().trim() == "0" ) {
+                mostrarError("Seleccione la localidad del remitente")
+                $("#RemitenteLocalidad").focus()
+                return;
+            }
+
+            /*
+            if ( $("#RemitenteCodigoPostal").val().trim().length != 4 ) {
+                mostrarError("El codigo postal debe contener 4 digitos")
+                $("#RemitenteCodigoPostal").focus()
+                return;
+            }
+            */
+
+            if ( !validarCodigoPostal($("#RemitenteCodigoPostal").val()) ) {
+                mostrarError("El codigo postal debe contener 4 digitos")
+                $("#RemitenteCodigoPostal").focus()
+                return;
+            }
+
+            if ( !validarEmail($("#RemitenteEmail").val())) {
+                mostrarError("Ingrese un email válido")
+                $("#RemitenteEmail").focus()
+                return;
+            }
+
+            /*
+            const regex = /_/g;
+            let celular = document.getElementById('RemitenteCelular').value
+            celular = celular.replace(regex, '')
+
+            if ( celular.length != 14) {
+                console.log("Es diferente de 14", celular.length)
+                mostrarError("Ingrese un número de celular válido")
+                
+                return;
+            }
+            */
+
+            if(!validarCelular()){
+                mostrarError("Ingrese un número de celular válido")
+                $("#RemitenteCelular").focus()
+                return;
+            }
+
+            if ( !$("#RemitenteNombreApoderado").val().trim().length > 0 ) {
+                mostrarError("Ingrese el nombre del firmante")
+                $("#RemitenteNombreApoderado").focus()
+                return;
+            }
+            if ( !$("#RemitenteApellidoApoderado").val().trim().length > 0 ) {
+                mostrarError("Ingrese el apellido del firmante")
+                $("#RemitenteApellidoApoderado").focus()
+                return;
+            }
+            if ( $("#RemitenteDNITipoApoderado").val().trim() == "0" ) {
+                mostrarError("Seleccione un tipo de documento para el firmante")
+                $("#RemitenteDNITipoApoderado").focus()
+                return;
+            }
+            if ( !$("#RemitenteDocumentoApoderado").val().trim().length > 0 ) {
+                mostrarError("Ingrese el DNI del firmante")
+                $("#RemitenteDocumentoApoderado").focus()
+                return;
+            }
+            
+            
+
+            VistaPreviaPDF('textBox')
+            
+        }
 </script>

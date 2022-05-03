@@ -300,6 +300,18 @@
                         </label>
                       </div>
                     </div>
+                    
+                    <!--
+                    <div class="form-group col-md-6" id="datetimepicker1">
+                      <label for="FechaDesde">Fecha ingreso hasta:</label>
+                      <input type="datetime-local" id="FechaDesde" name="FechaDesde" class="form-control">
+                    </div>
+                    
+                    <div class="form-group col-md-6" id="datetimepicker2">
+                      <label for="FechaHasta">Fecha ingreso hasta:</label>
+                      <input type="datetime-local" id="FechaHasta" name="FechaHasta" class="form-control">
+                    </div>
+                    -->
 
                   </div>
 
@@ -327,6 +339,29 @@
 </div>
 
 <script>
+
+const date = new Date();
+    let [month, day, year]       = [date.getMonth(), date.getDate(), date.getFullYear()];
+    let [hour, minutes] = [date.getHours(), date.getMinutes()];
+    
+    if((month+1) < 10){
+        month = "0"+(month+1)
+    }
+    
+    if(day < 10){
+        day = "0"+day
+    }
+    
+    if(minutes < 10){
+        minutes = "0"+minutes
+    }
+    
+    
+    const FechaDesde = document.getElementById("FechaDesde")
+    const FechaHasta = document.getElementById("FechaHasta")
+    
+    FechaDesde.value = `${year}-${month}-${day}T${hour}:${minutes}`;
+    FechaHasta.value = `${year}-${month}-${day}T${hour}:${minutes}`;
 
     /* PICKADATE */
     $('.datepicker').pickadate({

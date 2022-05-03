@@ -149,7 +149,6 @@
         <!-- SELECT2 -->
         <link rel="stylesheet" href="<?php if(SUBDOMINIO != ""){echo ("/" . SUBDOMINIO. "/");}else{echo ("/");} ?>Styles/recursos/plugins/select2/css/select2.min.css">
         <link rel="stylesheet" href="<?php if(SUBDOMINIO != ""){echo ("/" . SUBDOMINIO. "/");}else{echo ("/");} ?>Styles/recursos/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
-    
         <!-- style owner -->
         <link rel="stylesheet" href="<?php if(SUBDOMINIO != ""){echo ("/" . SUBDOMINIO. "/");}else{echo ("/");} ?>Styles/recursos/css/style.css">
 		<!-- FIN ESTILOS 2.0 -->
@@ -428,6 +427,8 @@
     <script src="<?php if(SUBDOMINIO != ""){echo ("/" . SUBDOMINIO. "/");}else{echo ("/");} ?>Styles/recursos/plugins/DataTables/datatables.min.js"></script>
     <!-- SELECT2 -->
     <script src="<?php if(SUBDOMINIO != ""){echo ("/" . SUBDOMINIO. "/");}else{echo ("/");} ?>Styles/recursos/plugins/select2/js/select2.min.js"></script>
+    <!-- INPUT MASK -->
+    <script src="<?php if(SUBDOMINIO != ""){echo ("/" . SUBDOMINIO. "/");}else{echo ("/");} ?>Styles/recursos/plugins/inputmask/jquery.inputmask.min.js"></script>
     <!-- AdminLTE App -->
     <script src="<?php if(SUBDOMINIO != ""){echo ("/" . SUBDOMINIO. "/");}else{echo ("/");} ?>Styles/recursos/js/adminlte.js"></script>
 
