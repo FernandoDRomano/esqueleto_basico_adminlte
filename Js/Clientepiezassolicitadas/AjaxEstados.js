@@ -236,8 +236,7 @@
 	
 	function search(){
 	    //alert("llega");
-	    
-		
+	    		
 		filtro=["User","time","UserId"];
 		filtroX=["1",Math.random(),UserId];
 		var Parametros = ArraydsAJson(filtro,filtroX);
@@ -247,6 +246,8 @@
 		var Indices=["BarcodeExterno","Documento","ApellidoYNombre","FechaI","FechaF"];
 		var Objetos = ["BarcodeExterno","Documento","ApellidoYNombre","FechaDesde","FechaHasta"];
 		var ValoresDirectos = ArraydsAJson(Indices,Objetos);//Manda Como Objeto En SelectDesdeConsulta Se Transforma En Terxto
+		
+		console.log(Objetos)
 
 		
 		var EsconderElementos=["9","33","34","35","36"];

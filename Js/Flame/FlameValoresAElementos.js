@@ -80,7 +80,7 @@ function ValoresAElementos(Config){//Funcion De Auto Completado De Elemento Gene
 		url:Config.Ajax,
 		data: PostData,
 		success:function(Resultado){
-			//console.log(Resultado);
+			console.log(Resultado);
 			var Resultado = Resultado[0].trim();
 			var Resultado = Resultado.trim();
 			if(Resultado=="NULL" || Resultado=="" || (Resultado.indexOf("Error:") == 0) ){
@@ -108,6 +108,8 @@ function ValoresAElementos(Config){//Funcion De Auto Completado De Elemento Gene
 							align: 'center',
 							width: 'auto'
 						});
+
+						console.log(ArraidResultado[0])
 					}
 				}else{
 					if(Config.Elementos.length>0 && Config.Elementos[0] != ""){
@@ -171,6 +173,8 @@ function ValoresAElementos(Config){//Funcion De Auto Completado De Elemento Gene
 					});
 				}
 				*/
+				alert(Resultado)
+				mostrarMsj(Resultado)
 				EndLoading();
 			}
 		},
@@ -196,4 +200,19 @@ function ValoresAElementos(Config){//Funcion De Auto Completado De Elemento Gene
 		}
 		//dataType: "text" // El tipo de datos esperados del servidor. Valor predeterminado: Intelligent Guess (xml, json, script, text, html).
 	})
+}
+
+function mostrarMsj(msj){
+	const alertError = `
+			<div class="alert alert-info alert-dismissible fade show alert-centrado" role="alert" id="alert-info">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				${msj} 
+			</div>
+		`
+
+	setTimeout(() => {
+		document.getElementById('alert-info').remove();
+	}, 6000);
+
+	document.getElementById('body').insertAdjacentHTML('afterbegin', alertError)
 }

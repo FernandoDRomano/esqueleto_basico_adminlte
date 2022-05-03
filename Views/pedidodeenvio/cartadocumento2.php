@@ -88,7 +88,40 @@
 		}
 		
 	</style>
+
+<div class="modal fade bd-example-modal-lg" id="ModalDatos" tabindex="-1" role="dialog" aria-labelledby="ModalDatosLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalDatosLabel">Importante </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row" id="container">
+                        <div class="col-md-12">
+                            <p style="text-align: justify;text-shadow: 2px 2px 10px #bfbfbf;border-style: double;padding: inherit;border-color: #292d57;">Una vez confirmada la Carta Documento los datos contenidos en la misma no podrán modificarse. Controle antes de confirmar su envío ya que luego no se podrán hacer reclamos al correo por datos incorrectos o inexistentes</p>
+                        </div>                            
+                    </div>
+                    <div class="row justify-content-between">
+                        <button type="button" class="btn btn-secondary mb-3 mb-lg-0" id="SalirDeModal" data-dismiss="modal">
+                            Volver A Edicion De Carta Documento
+                        </button>
+                        <button type="button"  class="btn btn-primary" id="SalirDeModal" onclick="EnviarCartaDoccumento(this)"> 
+                            Confirmar Y Enviar Carta Documento
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 	
+<!--
     <div class="col-md-12">
 		<div class="form-group">
 			<div id="ModalDatos" class="modal fade" >
@@ -100,8 +133,7 @@
 						<p style="text-align: justify;text-shadow: 2px 2px 10px #bfbfbf;border-style: double;padding: inherit;border-color: #292d57;">Una vez confirmada la Carta Documento los datos contenidos en la misma no podrán modificarse. Controle antes de confirmar su envío ya que luego no se podrán hacer reclamos al correo por datos incorrectos o inexistentes</p>
 					</div>
 					<div class="col-md-">
-						<button type="button"  class="btn btn-large btn-block btn-tertiary" id="SalirDeModal" style="width: 100%;"> <!-- onclick="javascript:window.history.back();" -->
-							<!-- <i class="fas fa-arrow-circle-left"></i> -->
+						<button type="button"  class="btn btn-large btn-block btn-secondary" id="SalirDeModal" style="width: 100%;"> 
 							<font style="vertical-align: inherit;">
 								<font style="vertical-align: inherit;">
 									Volver A Edicion De Carta Documento
@@ -111,8 +143,7 @@
 					</div>
 					<hr class="size1 hideline">
 					<div class="col-md-">
-						<button type="button"  class="btn btn-large btn-block btn-tertiary" id="SalirDeModal" onclick="EnviarCartaDoccumento(this)" style="width: 100%;"> <!-- onclick="javascript:window.history.back();" -->
-							<!-- <i class="fas fa-arrow-circle-left"></i> -->
+						<button type="button"  class="btn btn-large btn-block btn-primary" id="SalirDeModal" onclick="EnviarCartaDoccumento(this)" style="width: 100%;"> 
 							<font style="vertical-align: inherit;">
 								<font style="vertical-align: inherit;">
 									Confirmar Y Enviar Carta Documento
@@ -125,6 +156,7 @@
 			</div>
 		</div>
 	</div>
+    -->
 	
     <div class="row justify-content-center mt-3">
         <div class="col-12">
@@ -544,12 +576,17 @@
 				</div>
 		</div>
     </div>
-			
+		
+
         
 		<img id="imgBase" src="BasePDF.jpg" alt="Smiley face" height="auto" width="auto" hidden>
 		<div hidden>
 		<canvas id="canvas"  height="200px" width="auto" ></canvas>
 		</div>
+
+        <div id="DivEstado">
+
+        </div>
 
 		<style>
 			#Paragrapiframe{
@@ -915,4 +952,5 @@ body {
             VistaPreviaPDF('textBox')
             
         }
+
 </script>

@@ -20,9 +20,11 @@
 		if(isset ($_GET['callback'])){
 			//header("Content-Type: application/json");
 			echo $_GET['callback']."(".json_encode($RespuestaJsonAjax).")";
+			echo ("<script>alert('Enviado')</script>");
 		}else{
 			if(isset ($_POST['callback'])){
 				echo $_POST['callback']."(".json_encode($RespuestaJsonAjax).")";
+				echo ("<script>alert('Enviado')</script>");
 			}else{
 				
 			}
